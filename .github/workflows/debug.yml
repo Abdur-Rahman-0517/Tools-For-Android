@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -23,14 +23,15 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
 
-    - name: Grant execute permission for gradlew
+    - name: Change wrapper permissions
       run: chmod +x ./gradlew
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+    - name: Build Debug APK with warnings suppressed
+      run: |
+        ./gradlew assembleDebug -Pandroid.suppressUnsupportedCompileSdk=34
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: tools-for-android-debug
         path: app/build/outputs/apk/debug/app-debug.apk
