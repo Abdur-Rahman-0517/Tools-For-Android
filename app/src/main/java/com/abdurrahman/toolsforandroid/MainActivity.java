@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        // Use findViewById instead of view binding
         shakeFlashlightSwitch = findViewById(R.id.shake_flashlight_switch);
         autoSilentSwitch = findViewById(R.id.auto_silent_switch);
 
